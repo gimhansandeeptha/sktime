@@ -180,8 +180,8 @@ class TimesFMForecaster(_BaseGlobalForecaster):
 
     def __init__(
         self,
-        context_len,
-        horizon_len,
+        context_len=None,
+        horizon_len=None,
         freq=0,
         repo_id="google/timesfm-1.0-200m",
         input_patch_len=32,
@@ -284,6 +284,7 @@ class TimesFMForecaster(_BaseGlobalForecaster):
     def _predict(self, fh, X, y=None):
         if fh is None:
             fh = self.fh
+            print("Self fh: ", self.fh)
         fh = fh.to_relative(self.cutoff)
 
         if max(fh._values.values) > self.horizon_len:
