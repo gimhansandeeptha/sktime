@@ -11,6 +11,7 @@ import pandas as pd
 
 from sktime.forecasting.base import ForecastingHorizon, _BaseGlobalForecaster
 from sktime.utils.singleton import _multiton
+from sktime.utils.warnings import warn
 
 
 class TimesFMForecaster(_BaseGlobalForecaster):
@@ -297,12 +298,16 @@ class TimesFMForecaster(_BaseGlobalForecaster):
             print("Self fh: ", self.fh)
         fh = fh.to_relative(self.cutoff)
 
-        if max(fh._values.values) > self.horizon_len:
-            raise ValueError(
-                f"Error in {self.__class__.__name__}, the forecast horizon exceeds the"
-                f" specified horizon_len of {self.horizon_len}. Change the horizon_len"
-                " when initializing the model or try another forecasting horizon."
-            )
+        if self.horizon_len is not None:
+
+            if max(fh._values.values) > self.horizon_len:
+                raise ValueError(
+                    f"Error in {self.__class__.__name__}, the forecast horizon exceeds the"
+                    f" specified horizon_len of {self.horizon_len}. Change the horizon_len"
+                    " when initializing the model or try another forecasting horizon."
+                )
+        else:
+            warn("horizen_len is not explicitly provided, it is set to 128 by default internally" )
 
         _y = y if self._global_forecasting else self._y
 
