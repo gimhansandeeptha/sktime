@@ -244,7 +244,7 @@ class TimesFMForecaster(_BaseGlobalForecaster):
     def _fit(self, y, X, fh):
         if fh is not None:
             fh = fh.to_relative(self.cutoff)
-            self._horizon_len = max(self.horizon_len, *fh._values.values)
+            self._horizon_len = max(self.horizon_len, *fh._values.values, 10)
         else:
             self._horizon_len = self.horizon_len
 
