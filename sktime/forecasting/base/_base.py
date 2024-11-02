@@ -318,7 +318,6 @@ class BaseForecaster(_PredictProbaMixin, BaseEstimator):
             return ColumnSelect(key) ** self
 
     def fit(self, y, X=None, fh=None):
-        fh = [1, 2 ,3, 4, 5]
         """Fit forecaster to training data.
 
         State change:

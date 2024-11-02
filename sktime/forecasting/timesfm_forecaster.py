@@ -180,8 +180,8 @@ class TimesFMForecaster(_BaseGlobalForecaster):
 
     def __init__(
         self,
-        context_len=None,
-        horizon_len=None,
+        context_len,
+        horizon_len,
         freq=0,
         repo_id="google/timesfm-1.0-200m",
         input_patch_len=32,
@@ -242,7 +242,6 @@ class TimesFMForecaster(_BaseGlobalForecaster):
         super().__init__()
 
     def _fit(self, y, X, fh):
-        fh = [1, 2, 3, 4, 5]
         if fh is not None:
             fh = fh.to_relative(self.cutoff)
             self._horizon_len = max(self.horizon_len, *fh._values.values)
