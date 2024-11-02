@@ -319,6 +319,7 @@ class BaseForecaster(_PredictProbaMixin, BaseEstimator):
 
     def fit(self, y, X=None, fh=None):
         print("________________________________________")
+        fh = [1, 2, 3, 4, 5]
         print("fh 1: ",fh)
         """Fit forecaster to training data.
 
