@@ -249,8 +249,13 @@ class TimesFMForecaster(_BaseGlobalForecaster):
             fh = fh.to_relative(self.cutoff)
             print("____________________________________________________")
             print(self.horizon_len)
-            self._horizon_len = max(self.horizon_len, *fh._values.values)
+            if self.horizon_len is None:
+                self._horizon_len = max(*fh._values.values)
+            else:
+                self._horizon_len = max(self.horizon_len, *fh._values.values)
         else:
+            if self.horizon_len is None:
+                self.horizon_len = 128 #Default
             self._horizon_len = self.horizon_len
 
         self.tfm = _CachedTimesFM(
