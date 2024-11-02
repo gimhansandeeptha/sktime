@@ -207,14 +207,10 @@ class TimesFm:
         checkpoint_type=FLAX,
         step=None,
     ):
-        print("________________________________________")
-        print(checkpoint_path)
         """load_from_checkpoint."""
         # Download the checkpoint from Hugging Face Hub if not given
         if checkpoint_path is None:
-            print("Hi")
             checkpoint_path = path.join(snapshot_download(repo_id), "checkpoints")
-            print(checkpoint_path)
 
         #  Initialize the model weights.
         self._logging("Constructing model weights.")
